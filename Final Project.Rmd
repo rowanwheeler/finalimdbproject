@@ -1,0 +1,43 @@
+---
+title: "Final Project"
+author: "Nichole Yao"
+date: "12/3/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(mdsr)
+library(RMySQL)
+library(dplyr)
+db <- dbConnect_scidb(dbname = "imdb")
+big_data<- db%>% 
+dbGetQuery("SELECT DISTINCT n.name, n.id, n.gender, ci.movie_id, t.production_year
+FROM imdb.person_info pi
+JOIN name n ON pi.person_id = n.id
+JOIN cast_info ci ON ci.person_id = n.id
+JOIN movie_info mi ON ci.movie_id = mi.movie_id
+JOIN title t ON t.id = mi.movie_id
+WHERE ci.role_id = 3
+AND t.kind_id = 1;")
+big_data
+# AND mi.info_type_id = 3 
+# AND mi.info IN ('Romance', 'Comedy','Horror','Action')
+distinct(big_data)
+big_data2<- na.omit(big_data)
+big_data3<- big_data2 %>%
+  select(production_year,gender,movie_id)%>%
+  filter(production_year < 2018, production_year >1996)%>%
+  group_by(production_year,gender)%>%
+  summarize(Count = n())
+#male = sum(ifelse(gender =="m",1,0)),
+#female = sum(ifelse(gender =="f",1,0))
+big_data4<- big_data3 %>%
+  group_by(production_year)%>%
+  summarize(m=sum(male),
+            f=sum(female))
+
+ 
+library(tidyverse)
+ggplot(big_data3, aes(factor(production_year), Count, fill = gender)) + 
+geom_bar(stat="identity", position = "dodge",width=.55)
+```
