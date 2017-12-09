@@ -1,5 +1,5 @@
 ---
-title: "Final_Project"
+title: "Final Project"
 author: "Nichole Yao"
 date: "12/3/2017"
 output: html_document
@@ -8,32 +8,41 @@ output: html_document
 title: "Mini Project#4"
 output: github_document
 ---
+Title: Chick Flicks Are the Key to Fixing Hollywood’s Gender Diversity Problem
+
+Lede: Almost daily, another prominent man in the entertainment industry is accused of sexual harassment. The overwhelming power held by male producers and directors in Hollywood creates a breeding ground for sexual harassment. Changing such a widespread problem won’t be easy. As long as male-driven movies are created by and for men, Hollywood will still value men’s voices more, and so continue to prevent female victims from speaking out without fear of ostracism. The best way to change this trend is to prioritize women in positions of power, and not just in front of the camera: as directors and producers as well.
+
 Nutgraph: There are more female producers and directors than ever before. However, they still represent the minority in the film industry. By investing in female-run movies, Hollywood culture can create gender parity. Some genres of movies have higher amounts of female executives than others.
 
 ```{r, message=FALSE}
 library(mdsr)
 library(RMySQL)
 library(dplyr)
+library(plyr)
 db <- dbConnect_scidb(dbname = "imdb")
 big_data<- db%>% 
-dbGetQuery("SELECT n.name, n.id AS person_id, n.gender, ci.movie_id, t.production_year, ci.role_id
+dbGetQuery("SELECT n.name, n.id AS person_id, n.gender, ci.movie_id, t.production_year,ci.role_id, mi.info AS country
 FROM imdb.person_info pi
 JOIN name n ON pi.person_id = n.id
 JOIN cast_info ci ON ci.person_id = n.id
 JOIN movie_info mi ON ci.movie_id = mi.movie_id
 JOIN title t ON t.id = mi.movie_id
-AND ci.role_id = 3
-OR ci.role_id = 8
-AND mi.info_type_id = 3
+WHERE (ci.role_id = 3
+OR ci.role_id = 8)
 AND t.kind_id = 1
-HAVING t.production_year <2017;")
+AND mi.info_type_id = 8
+AND mi.info IN('USA','Nigeria','India','China','Iceland')
+AND t.production_year <2017
+AND t.production_year >1939;")
 
 big_data1<- distinct(big_data)
 big_data2 <- na.omit(big_data1)
+
+# Producer
 big_data3<- big_data2 %>%
-  filter(role_id =3) %>%
+  filter(role_id ==3, country == "USA" )%>%
   mutate(decade = 10 * floor(production_year / 10))%>%
-  select(decade,gender) %>%
+  select(decade,gender,country) %>%
   group_by(decade, gender) %>% 
   dplyr::summarize(N = n(), male = sum(ifelse(gender =="m",1,0)),
 female = sum(ifelse(gender =="f",1,0)))
@@ -54,15 +63,15 @@ p3 <- ggplot() + geom_bar(aes(y = floor(percentage), x = decade, fill = gender),
 geom_text(data=d_percentage, aes(x = decade, y = pos, label = paste0(floor(percentage),"%")), size=4) + 
 theme(legend.position="bottom", legend.direction="horizontal",
                   legend.title = element_blank()) + 
-                  scale_x_continuous(breaks=seq(1890,2010,10))
+                  scale_x_continuous(breaks=seq(1880,2010,10))
 p3
 
-#producter:
+#Director:
 big_data5<- big_data2 %>%
-  filter(role_id =8) %>%
+  filter(role_id ==8, country == "USA") %>%
   mutate(decade = 10 * floor(production_year / 10))%>%
-  select(decade,gender) %>%
-  group_by(decade, gender) %>% 
+  select(decade,gender,country) %>%
+  group_by(decade, gender,country) %>% 
   dplyr::summarize(N = n(), male = sum(ifelse(gender =="m",1,0)),
 female = sum(ifelse(gender =="f",1,0)))
 big_data6<- big_data5 %>%
@@ -76,37 +85,34 @@ d_percentage2<- big_data6 %>%
   select(male_percentage, female_percentage, decade, total) %>% 
   tidyr::gather(key = "gender", value = "percentage", -decade, -total)
 
-d_percentage2 <- ddply(d_percentage, .(decade),
+d_percentage2 <- ddply(d_percentage2, .(decade),
                 transform, pos = cumsum(percentage) - (0.5 * percentage))
 p4 <- ggplot() + geom_bar(aes(y = floor(percentage), x = decade, fill = gender), data = d_percentage2, stat="identity") + 
-geom_text(data=d_percentage, aes(x = decade, y = pos, label = paste0(floor(percentage),"%")), size=4) + 
+geom_text(data=d_percentage2, aes(x = decade, y = pos, label = paste0(floor(percentage),"%")), size=4) + 
 theme(legend.position="bottom", legend.direction="horizontal",
                   legend.title = element_blank()) + 
-                  scale_x_continuous(breaks=seq(1890,2010,10))
+                  scale_x_continuous(breaks=seq(1880,2010,10))
 p4
 
 
-
-
-
-
-
-
-
 # count bar graph if needed
-big_data7<- big_data2 %>%
-  filter(ci.role_id)
-  select(production_year,gender,movie_id)%>%
-  filter(production_year < 2018, production_year >1996)%>%
-  group_by(production_year,gender)%>%
-  summarize(Count = n())
-  group_by(production_year)%>%
-  summarize(m=sum(male),
-            f=sum(female))
+big_data8<- big_data2 %>%
+  filter(role_id ==8) %>%
+  mutate(decade = 10 * floor(production_year / 10))%>%
+  select(decade,gender,country) %>%
+  group_by(decade, gender,country) %>% 
+  dplyr::summarize(N = n(), male = sum(ifelse(gender =="m",1,0)),
+female = sum(ifelse(gender =="f",1,0)))
+big_data9<- big_data8 %>%
+  group_by(decade,country) %>%
+  dplyr::summarize(m = sum(male), 
+                   f = sum(female),
+                   total = m+f,
+                   female_percentage = f*100/total)
+ggplot(big_data9,aes(x=decade, y=female_percentage))+
+  geom_smooth(aes(color = country))
 
-library(tidyverse)
-ggplot(big_data7, aes(factor(production_year), Count, fill = gender)) + 
-geom_bar(stat="identity", position = "dodge",width=.55)
+ggplot(big_data7, aes(factor(decade), N, fill = country)) + geom_bar(stat="identity", position = "dodge",width=.55)
 
 
 
