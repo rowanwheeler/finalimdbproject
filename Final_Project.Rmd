@@ -139,6 +139,7 @@ ggplot(big_data9,aes(x=decade, y=female_percentage))+
   geom_smooth(aes(color = country))+
   scale_y_continuous(limits = c(0,1),labels = scales::percent, breaks = c(0,0.25,0.5,0.75,1))
 ```
+  
   IMDb meticulously records Western films, but it does not have as detailed information on international films in languages besides English. Many movies released in India and China are not registered on IMDb, especially the lower-budget movies that women are more likely to direct or produce, so our data may be skewed. Even so, it is clear that the amount of female filmmakers has been increasing worldwide. 
 
 [Krew Boylan, Rose Byrne, Jessica Carrera, Shannon Murphy and Gracie Otto, the founders of Dollhouse Pictures. Dollhouse Pictures is an Australian independent production company which prioritises female-driven storytelling.](http://www.cinemazzi.com/wp-content/uploads/2015/04/The-Dollhouse-Collective-group-image.jpg)
