@@ -2,12 +2,13 @@
 title: "Final Project"
 author: "Nichole Yao, Yuqing Geng, Rowan Wheeler"
 date: "12/3/2017"
-output: 
+output:
   html_document:
-  code_folding : hide
+    code_folding: hide
+    theme: flatly
 ---
 
-![Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos](https://i.guim.co.uk/img/media/58fef77a821ebae1c088bf0bdcd36afce7e2ab88/0_265_7608_4566/master/7608.jpg?w=620&q=20&auto=format&usm=12&fit=max&dpr=2&s=9931135c53536e0fb943707bc896635c.png)
+![Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos](https://i.guim.co.uk/img/media/58fef77a821ebae1c088bf0bdcd36afce7e2ab88/0_265_7608_4566/master/7608.jpg?w=620&q=20&auto=format&usm=12&fit=max&dpr=2&s=9931135c53536e0fb943707bc896635c)
 
 
 
