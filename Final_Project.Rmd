@@ -26,7 +26,7 @@ Title: Chick Flicks Are the Key to Fixing Hollywood’s Gender Diversity Problem
   
   Harassment also occurs when people are seen as disposable. Companies pay millions of dollars in settlements to protect their star performers, as [Fox did with Bill O’Reilly](https://www.washingtonpost.com/lifestyle/style/bill-oreilly-settled-sixth-sexual-harassment-claim-for-32-million/2017/10/21/ff34b24c-b68c-11e7-9e58-e6288544af98_story.html?utm_term=.d7c83589994f). In Hollywood, where knowing the right people can help you gain or lose a job and one word from a powerful industry figure can ruin your career, sexual harassment is all too easy to perpetrate. Changing such a widespread problem won’t be easy. As long as male-driven movies are created by and for men, Hollywood will still value men’s voices more, and so continue to prevent female victims from speaking out without fear of ostracism. The best way to change this trend is to prioritize women in positions of power, and not just in front of the camera: as directors and producers as well. 
 
-```{r, message=FALSE}
+```{r, message=FALSE,eval=FALSE}
 library(mdsr)
 library(RMySQL)
 library(dplyr)
@@ -46,9 +46,17 @@ AND mi.info_type_id = 8
 AND mi.info IN('China','USA','Australia','India','Canada')
 AND t.production_year <2017
 AND t.production_year >1939;")
-
 big_data1<- distinct(big_data)
 big_data2 <- na.omit(big_data1)
+save(big_data2,file = "big_data.rda")
+```
+
+```{r}
+library(mdsr)
+library(RMySQL)
+library(dplyr)
+library(plyr)
+load("big_data.rda")
 
 # Producer
 big_data3<- big_data2 %>%
@@ -106,7 +114,7 @@ theme(legend.position="bottom", legend.direction="horizontal",
                   scale_x_continuous(breaks=seq(1880,2010,10))
 p4
 ```
-We took data from the International Movie Database, also known as IMDb. IMDb contains information about millions of pieces of media, including television, online content, and movies. We found the listed gender of the directors and producers of movies made in the United States, then grouped them by decade. Clearly, while the percentage has increased over time, women producers and directors are still a minority in their fields. With a relatively stable increase of a roughly 5% increase per decade, based on the historic rate it will take another five decades for women in leadership roles in Hollywood to reflect real life gender ratios. While we looked at a large set of movies, including lower budget films, these percentages would be even lower for big budget movies and more popular movies shown in wide release. According to the Media, Diversity, & Social Change Initiative out of USC Annenberg, as budgets increase, opportunities for female filmmakers decrease. Their data shows that from 2007-2016, women directed 28% of narrative shorts and 27% of narrative independent films, but only 4% of top-grossing films in Hollywood. Since our data encompasses all of these genres, it presents a higher proportion of female directors and producers than may be presented by other, more limited sets of data that only look at the directors for wide-release movies. Thinktanks like the Media, Diversity, & Social Change Initiative prefer to focus on such limited data sets since they are what affect the public consciousness. However, with the film industry expanding and films being produced on even more platforms, like Netflix movies and independent, internet-released movies, we felt it was important to acknowledge the opportunities female creators of all budgets have created for themselves and so therefore used a larger data set. As it gets easier to release your own content, more and more independent creators of all genders, races, and professional levels have been able to gain audiences, voices, and therefore enough clout in the film industry to speak up about sexual harassment.
+  We took data from the International Movie Database, also known as IMDb. IMDb contains information about millions of pieces of media, including television, online content, and movies. We found the listed gender of the directors and producers of movies made in the United States, then grouped them by decade. Clearly, while the percentage has increased over time, women producers and directors are still a minority in their fields. With a relatively stable increase of a roughly 5% increase per decade, based on the historic rate it will take another five decades for women in leadership roles in Hollywood to reflect real life gender ratios. While we looked at a large set of movies, including lower budget films, these percentages would be even lower for big budget movies and more popular movies shown in wide release. According to the Media, Diversity, & Social Change Initiative out of USC Annenberg, as budgets increase, opportunities for female filmmakers decrease. Their data shows that from 2007-2016, women directed 28% of narrative shorts and 27% of narrative independent films, but only 4% of top-grossing films in Hollywood. Since our data encompasses all of these genres, it presents a higher proportion of female directors and producers than may be presented by other, more limited sets of data that only look at the directors for wide-release movies. Thinktanks like the Media, Diversity, & Social Change Initiative prefer to focus on such limited data sets since they are what affect the public consciousness. However, with the film industry expanding and films being produced on even more platforms, like Netflix movies and independent, internet-released movies, we felt it was important to acknowledge the opportunities female creators of all budgets have created for themselves and so therefore used a larger data set. As it gets easier to release your own content, more and more independent creators of all genders, races, and professional levels have been able to gain audiences, voices, and therefore enough clout in the film industry to speak up about sexual harassment.
 
 ## #MeToo, a Global Movement
 
