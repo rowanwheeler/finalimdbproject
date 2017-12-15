@@ -50,6 +50,7 @@ save(big_data2,file = "big_data.rda")
 ```
 
 ```{r, message = FALSE, warning = FALSE}
+
 library(mdsr)
 library(RMySQL)
 library(dplyr)
