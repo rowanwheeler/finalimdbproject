@@ -106,8 +106,10 @@ d_percentage2<- big_data6 %>%
 
 d_percentage2 <- ddply(d_percentage2, .(decade),
                 transform, pos = cumsum(percentage) - (0.5 * percentage))
-p4 <- ggplot() + geom_bar(aes(y = floor(percentage), x = decade, fill = gender), data = d_percentage2, stat="identity") + 
-geom_text(data=d_percentage2, aes(x = decade, y = pos, label = paste0(floor(percentage),"%")), size=4) + 
+p4 <- ggplot() + 
+  geom_bar(aes(y = floor(percentage), x = decade, fill = gender), data = d_percentage2, stat="identity") + 
+   labs(x = "Decades", y = "Percentage", title="Percentage of US Female Directors in the Past Decades")+ 
+    scale_y_continuous(limits = c(0,100),labels = scales::percent)+
 theme(legend.position="bottom", legend.direction="horizontal",
                   legend.title = element_blank()) + 
                   scale_x_continuous(breaks=seq(1880,2010,10))
@@ -125,7 +127,6 @@ We wanted to see if this increase in female filmmakers was only in the United St
 ```{r, message=FALSE, warning=FALSE}
 # count bar graph if needed
 big_data8<- big_data2 %>%
-  filter(role_id ==8) %>%
   mutate(decade = 10 * floor(production_year / 10))%>%
   select(decade,gender,country) %>%
   group_by(decade, gender,country) %>% 
@@ -138,8 +139,9 @@ big_data9<- big_data8 %>%
                    total = m+f,
                    female_percentage = f/total)
 ggplot(big_data9,aes(x=decade, y=female_percentage))+
-  geom_smooth(aes(color = country))+
-  scale_y_continuous(limits = c(0,1),labels = scales::percent, breaks = c(0,0.25,0.5,0.75,1))
+  geom_smooth(se=FALSE, aes(color = country))+
+  scale_y_continuous(limits = c(0,1),labels = scales::percent, breaks = c(0,0.25,0.5,0.75,1))+
+  labs(x = "Decades", y = "Percentage", title="Percentage of Female Creators Among Five Countries in the Past Decades")
 ```
   
   IMDb meticulously records Western films, but it does not have as detailed information on international films in languages besides English. Many movies released in India and China are not registered on IMDb, especially the lower-budget movies that women are more likely to direct or produce, so our data may be skewed. Even so, it is clear that the amount of female filmmakers has been increasing worldwide. 
@@ -149,3 +151,8 @@ ggplot(big_data9,aes(x=decade, y=female_percentage))+
 Despite the global growth of women in film, the movement to end sexual assault is occurring almost exclusively in countries like Australia and Canada, who share relatively similar cultures and percentages of female filmmakers as the United States. In 2015, a group of female Directors Guild members, led by Gillian Armstrong, pressured the Australian government’s public screen production fund to address the lack of female directors within Australian film. Australia [established several initiatives](https://www.if.com.au/screen-australia-reveals-gender-matters-three-tick-test/), including a “three ticks” policy, which ensured that 50% of all film projects the government backed by 2019 would have women in three of four creatives roles: producer, director, writer, or lead actor. This week, Australia announced that it was creating a sexual harassment code of practice that all film and TV companies must follow to be given government funding. A similar effort took place from 1974-1996 in Canada, where the Canadian government funded an studio which would exclusively make films by women filmmakers for and about women. It was a critical success, creating Oscar winning films about boundary-pushing social issues, but eventually ended due to lack of government funding. Australia and Canada used control of government [funds to support female filmmakers](http://time.com/5044854/hollywood-women-studio-d/), but Hollywood is almost exclusively driven by private companies. In order to take steps like Australia’s, Hollywood must promote stricter standards and financial incentives to increase its amount of female directors and producers. By doing so, women will be given the space they need to tell their stories, whether fictional or all too real. 
 
 Viewing date: `r format(Sys.Date(), "%B %e, %Y")`
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c9293b39aa74c506dcfb3d77699acf598b6185e3
