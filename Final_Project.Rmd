@@ -7,7 +7,6 @@ output:
     code_folding: hide
     theme: flatly
 ---
-<span style="color:red">GitLink</span> ^[Repository Link :https://github.com/rowanwheeler/finalimdbproject.git]
 
 
 ![<span style="color:grey">Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos.</span>](http://info7rm.blob.core.windows.net.optimalcdn.com/images/2017/09/11/patty2.jpg)
@@ -25,6 +24,8 @@ output:
   Harassment also occurs when people are seen as disposable. Companies pay millions of dollars in settlements to protect their star performers, as [Fox did with Bill O’Reilly](https://www.washingtonpost.com/lifestyle/style/bill-oreilly-settled-sixth-sexual-harassment-claim-for-32-million/2017/10/21/ff34b24c-b68c-11e7-9e58-e6288544af98_story.html?utm_term=.d7c83589994f). In Hollywood, where knowing the right people can help you gain or lose a job and one word from a powerful industry figure can ruin your career, sexual harassment is all too easy to perpetrate. Changing such a widespread problem won’t be easy. As long as male-driven movies are created by and for men, Hollywood will still value men’s voices more, and so continue to prevent female victims from speaking out without fear of ostracism. The best way to change this trend is to prioritize women in positions of power, and not just in front of the camera: as directors and producers as well. 
 
 ```{r, message=FALSE,eval=FALSE}
+install.packages("stringi")
+library(stringi)
 library(mdsr)
 library(RMySQL)
 library(dplyr)
@@ -50,6 +51,7 @@ save(big_data2,file = "big_data.rda")
 ```
 
 ```{r, message = FALSE, warning = FALSE}
+
 
 library(mdsr)
 library(RMySQL)
@@ -155,3 +157,9 @@ theme(text=element_text(family="Times New Roman", face="bold", size=12))
 Despite the global growth of women in film, the movement to end sexual assault is occurring almost exclusively in countries like Australia and Canada, who share relatively similar cultures and percentages of female filmmakers as the United States. In 2015, a group of female Directors Guild members, led by Gillian Armstrong ^[Gillian Armstrong is an award-winning Australian feature film and documentary director who specializes in period drama. Her films often feature female perspectives and protagonists.], pressured the Australian government’s public screen production fund to address the lack of female directors within Australian film. Australia [established several initiatives](https://www.if.com.au/screen-australia-reveals-gender-matters-three-tick-test/), including a “three ticks” policy, which ensured that 50% of all film projects the government backed by 2019 would have women in three of four creatives roles: producer, director, writer, or lead actor. This week, Australia announced that it was creating a sexual harassment code of practice that all film and TV companies must follow to be given government funding. A similar effort took place from 1974-1996 in Canada, where the Canadian government funded an studio which would exclusively make films by women filmmakers for and about women. It was a critical success, creating Oscar winning films about boundary-pushing social issues, but eventually ended due to lack of government funding. Australia and Canada used control of government [funds to support female filmmakers](http://time.com/5044854/hollywood-women-studio-d/), but Hollywood is almost exclusively driven by private companies. In order to take steps like Australia’s, Hollywood must promote stricter standards and financial incentives to increase its amount of female directors and producers. By doing so, women will be given the space they need to tell their stories, whether fictional or all too real. 
 
 <span style="color:grey">Viewing date: </span>`r format(Sys.Date(), "%B %e, %Y")`
+
+```{r}
+devtools::install_github("benmarwick/wordcountaddin", 
+                         type = "source", dependencies = TRUE)
+wordcountaddin:::text_stats()
+```
