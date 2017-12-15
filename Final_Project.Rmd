@@ -55,6 +55,7 @@ library(mdsr)
 library(RMySQL)
 library(dplyr)
 library(plyr)
+library(scales)
 load("big_data.rda")
 
 # Producer
@@ -110,7 +111,8 @@ p4 <- ggplot() +
   geom_bar(aes(y = floor(percentage), x = decade, fill = gender), data = d_percentage2, stat="identity") + 
 geom_text(data=d_percentage2, aes(x = decade, y = pos, label = paste0(floor(percentage),"%")), size=4)+
    labs(x = "Decades", y = "Percentage", title="Percentage of US Female Directors in the Past Decades")+ 
- scale_y_continuous(limits = c(0,100),, breaks = c(0,25,50,75,100), labels = scales::percent)+
+scale_y_continuous(labels = percent)+
+#scale_y_continuous(labels = scales::percent)+
 theme(legend.position="bottom", legend.direction="horizontal",
                   legend.title = element_blank()) + 
                   scale_x_continuous(breaks=seq(1880,2010,10))
