@@ -8,7 +8,8 @@ output:
     theme: flatly
 ---
 viewing date: `r format(Sys.Date(), "%B %e, %Y")`
-![Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos](http://info7rm.blob.core.windows.net.optimalcdn.com/images/2017/09/11/patty2.jpg "Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos")
+
+![Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos.](http://info7rm.blob.core.windows.net.optimalcdn.com/images/2017/09/11/patty2.jpg)
 
 
 
