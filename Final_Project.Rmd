@@ -7,13 +7,14 @@ output:
     code_folding: hide
     theme: flatly
 ---
-viewing date: `r format(Sys.Date(), "%B %e, %Y")`
+Viewing date: `r format(Sys.Date(), "%B %e, %Y")`
 
 ![Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos.](http://info7rm.blob.core.windows.net.optimalcdn.com/images/2017/09/11/patty2.jpg)
 
 
 
-##How the World is Stopping Sexual Harassment in Film
+##How the World is Stopping Sexual Harassment in Film ^[Repository Link :https://github.com/rowanwheeler/finalimdbproject.git]
+
   Almost daily, another prominent man in Hollywood is accused of sexual harassment. As the voices of powerful female actors, directors, producers, and other film industry figures have spoken out against sexual harassment, The #MeToo movement ^["Me Too" as a two-word hashtag used on social media in October 2017 to denounce sexual assault and harassment, in the wake of sexual misconduct allegations against film producer and executive Harvey Weinstein] in the United States has had a profound impact. It has held many powerful men accountable for their inappropriate conduct. It has even been [named the 2017 Times Magazine Person of the Year](http://time.com/time-person-of-the-year-2017-silence-breakers/). However, the impact of this movement has spread beyond the United States. As it struggles to change its toxic environment, Hollywood must look globally to determine what other actions it can take to prevent harassment in the future. 
   
    As the amount of women working in the global film industry grows, women’s voices increase in power, both onscreen and off. To create more opportunities for women in film, Hollywood must look internationally to learn from actions taken by other countries. To gain insight into the history of women in Hollywood, we examined how the percentage of women in positions of power in Hollywood has changed over time and how that percentage compares to international percentages of female filmmakers. We wanted to know if the United States has higher levels of female producers and directors than other countries and how other countries responded to the #MeToo movement.
@@ -147,3 +148,5 @@ ggplot(big_data9,aes(x=decade, y=female_percentage))+
 ![Krew Boylan, Rose Byrne, Jessica Carrera, Shannon Murphy and Gracie Otto, the founders of Dollhouse Pictures. Dollhouse Pictures is an Australian independent production company which prioritises female-driven storytelling.](http://www.cinemazzi.com/wp-content/uploads/2015/04/The-Dollhouse-Collective-group-image.jpg)
 
 Despite the global growth of women in film, the movement to end sexual assault is occurring almost exclusively in countries like Australia and Canada, who share relatively similar cultures and percentages of female filmmakers as the United States. In 2015, a group of female Directors Guild members, led by Gillian Armstrong, pressured the Australian government’s public screen production fund to address the lack of female directors within Australian film. Australia [established several initiatives](https://www.if.com.au/screen-australia-reveals-gender-matters-three-tick-test/), including a “three ticks” policy, which ensured that 50% of all film projects the government backed by 2019 would have women in three of four creatives roles: producer, director, writer, or lead actor. This week, Australia announced that it was creating a sexual harassment code of practice that all film and TV companies must follow to be given government funding. A similar effort took place from 1974-1996 in Canada, where the Canadian government funded an studio which would exclusively make films by women filmmakers for and about women. It was a critical success, creating Oscar winning films about boundary-pushing social issues, but eventually ended due to lack of government funding. Australia and Canada used control of government [funds to support female filmmakers](http://time.com/5044854/hollywood-women-studio-d/), but Hollywood is almost exclusively driven by private companies. In order to take steps like Australia’s, Hollywood must promote stricter standards and financial incentives to increase its amount of female directors and producers. By doing so, women will be given the space they need to tell their stories, whether fictional or all too real. 
+
+
