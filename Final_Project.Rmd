@@ -1,14 +1,14 @@
 ---
-title: "Final Project"
+title: "How the World is Stopping Sexual Harassment in Film"
 author: "Nichole Yao, Yuqing Geng, Rowan Wheeler"
-
+date: Dec 14th, 2017
 output:
   html_document:
     code_folding: hide
     theme: flatly
 ---
-`r format(Sys.Date(), "%B %e, %Y")`
-![Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos](https://i.guim.co.uk/img/media/58fef77a821ebae1c088bf0bdcd36afce7e2ab88/0_265_7608_4566/master/7608.jpg?w=620&q=20&auto=format&usm=12&fit=max&dpr=2&s=9931135c53536e0fb943707bc896635c)
+viewing date: `r format(Sys.Date(), "%B %e, %Y")`
+![Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos](http://info7rm.blob.core.windows.net.optimalcdn.com/images/2017/09/11/patty2.jpg "Director Patty Jenkins and lead actor Gal Gadot on the set of $800m blockbuster Wonder Woman. Photograph: Clay Enos")
 
 
 
