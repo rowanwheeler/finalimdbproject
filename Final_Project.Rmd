@@ -71,15 +71,18 @@ big_data4<- big_data3 %>%
 
 d_percentage<- big_data4 %>%
   mutate(total = m+f,
-  male_percentage = m*100/total, 
-  female_percentage = f*100/total) %>%
+  male_percentage = m/total, 
+  female_percentage = f/total) %>%
   select(male_percentage, female_percentage, decade, total) %>% 
   tidyr::gather(key = "gender", value = "percentage", -decade, -total)
 
 d_percentage <- ddply(d_percentage, .(decade),
                 transform, pos = cumsum(percentage) - (0.5 * percentage))
-p3 <- ggplot() + geom_bar(aes(y = floor(percentage), x = decade, fill = gender), data = d_percentage, stat="identity") + 
-geom_text(data=d_percentage, aes(x = decade, y = pos, label = paste0(floor(percentage),"%")), size=4) + 
+
+p3 <- ggplot() + geom_bar(aes(y = round(percentage,digits = 2), x = decade, fill = gender), data = d_percentage, stat="identity") + 
+geom_text(data=d_percentage, aes(x = decade, y = pos, label = paste0(round(percentage,digits = 2)*100,"%")), size=4) +
+   labs(x = "Decades", y = "Percentage", title="Percentage of US Female Producers in the Past Decades")+ 
+ scale_y_continuous(limits = c(0,1), breaks = c(0,0.25,0.50,0.75,1), labels = scales::percent)+ 
 theme(legend.position="bottom", legend.direction="horizontal",
                   legend.title = element_blank()) + 
                   scale_x_continuous(breaks=seq(1880,2010,10))
